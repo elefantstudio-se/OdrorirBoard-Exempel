@@ -1,0 +1,109 @@
+﻿@using Microsoft.AspNet.Identity
+@using Microsoft.AspNet.Identity.EntityFramework
+@using OdrorirBoard.Models
+@model IEnumerable<OdrorirBoard.Helpers.NotificationAlert.Notification>
+
+
+@{
+    ViewBag.Title = "OdrorirBoard";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Administration Dashboard</title>
+    <!-- CSS -->
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500" />
+    <link rel="stylesheet" href="~/Content/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/Content/font-awesome.min.css" />
+    <link rel="stylesheet" href="~/Content/Site.css" />
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+<body>
+    @Scripts.Render("~/bundles/modernizr")
+    <br />
+    <ol class="breadcrumb">
+        <li><a href="#">BackEnd</a></li>
+        <li class="active">Management</li>
+        <li class="active">Notification Manager</li>
+    </ol>
+    <br />
+    <br />
+    <h2>Notification Manager</h2>
+    <div class="panel panel-info">
+        <div class="panel-heading"><b>List Notifications</b></div>
+        <table id="notiTable" class="table">
+            <tr>
+                <th>Name</th>
+                <th>Type</th>
+                <th>Controller</th>
+                <th>Action</th>
+                <th>User</th>
+                <th>Dismissed?</th>
+            </tr>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Title)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NotificationType)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Controller)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Action)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UserId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IsDismissed)
+                    </td>
+                    <td>
+                        @*<span>
+                            @Html.ActionLink(" ", "ModNotifyDialog", "BackEnd", new { id = item.NotificationId }, new { @class = "modal-link glyphicon glyphicon-info-sign" })
+                        </span>*@
+                        <span>
+                            <a href="@Url.Action("Change", "Notify", new { id = item.NotificationId, nmCuser = item.UserId, nmCTitle = item.Title })"><span class="glyphicon glyphicon-pencil"></span></a>
+                        </span>
+                        <span>
+                            <a href="@Url.Action("Remove", "Notify", new { id = item.NotificationId, nmCuser = item.UserId })">TEST</a>
+
+                        </span>
+                    </td>
+                </tr>
+            }
+        </table>
+        <span>
+            <a href="@Url.Action("New", "Notify")"><span class="glyphicon glyphicon-plus-sign"></span> Create new</a>
+        </span>
+    </div>
+    <div class="navbar-collapse collapse">
+        @Html.Partial("_adminMenuPartial")
+    </div>
+    <div class="container body-content">
+        @{ Html.RenderPartial("_Alerts"); }
+        <hr />
+    </div>
+    @Scripts.Render("~/bundles/jquery")
+    
+    @*The Bootstrap JS is loaded here*@
+    @*The JS takes care of some things that can't happen in pure CSS and adds functionality *@
+    @*@Scripts.Render("~/bundles/bootstrap")*@
+</body>
+</html>
+

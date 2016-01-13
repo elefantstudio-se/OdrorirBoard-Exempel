@@ -1,0 +1,47 @@
+﻿@model OdrorirBoard.Areas.BackEnd.Models.TeamViewModel.Team
+
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h4 class="modal-title" id="deleteModal">Want to delete this Team?</h4>
+</div>
+
+<div class="modal-body">
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TeamState)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TeamState)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Id)
+        </dd>
+    </dl>
+</div>
+
+    
+    
+    @using (Html.BeginForm("Remove", "Teams", FormMethod.Post))
+    {
+                @Html.AntiForgeryToken()
+
+                <div class="modal-footer">
+                    <button class="btn" data-dismiss="modal">No</button>
+                    <input class="btn btn-danger" type="submit" value="Yes" />
+                </div>
+            }
+    
+    

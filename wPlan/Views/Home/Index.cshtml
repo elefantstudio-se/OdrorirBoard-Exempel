@@ -1,0 +1,48 @@
+﻿@using OdrorirBoard.Areas.BackEnd.Models
+
+    <nav class="navbar navbar-ct-danger navbar-fixed-top" role="navigation">
+        
+            <div class="navbar-header">
+                <button type="button" data-target="#navbarCollapse" data-toggle="collapse" class="navbar-toggle">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a href="#" class="navbar-brand">OdrorirBoard - {Org}</a>
+            </div>
+        <div id="navbarCollapse" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li class="active"><a href="#"> Start</a></li>
+                <li class="dropdown">
+                    <a data-toggle="dropdown" class="dropdown-toggle" href="#"><span class="fa fa-user"></span> Min sida   <b class="caret"></b></a>
+                    <ul role="menu" class="dropdown-menu">
+                        <li><a href="#"><span class="fa fa-envelope-o"></span> Inkorg</a></li>
+                        <li><a href="#"><span class="fa fa-calendar"></span> Kalender</a></li>
+                        <li><a href="#"><span class="fa fa-paper-plane-o"></span> Rapportera</a></li>
+                        <li><a href="#"><span class="fa fa-building-o"></span> Organisation</a></li>
+                        <li><a href="#"><span class="fa fa-building-o"></span> Arbetsplats</a></li>
+                        <li class="divider"></li>
+                        <li><a href="#"><span class="fa fa-cogs"></span> Inställningar</a></li>
+                        <li><a href="#"><span class="fa fa-sign-out"></span> Logga ut</a></li>
+                        @if (ViewBag.Notifications != null)
+                        {
+                            foreach (NotificationViewModel notification in ViewBag.Notifications)
+                            {
+                                <li>
+                                    <a href="#">
+                                        @notification.NotificationType
+                                        <span class="badge badge-@notification.BadgeClass">
+                                            @notification.Count
+                                        </span>
+                                    </a>
+                                </li>
+                            }
+                        }
+                    </ul>
+                <li><a href="#"> Senaste <span class="fa fa-newspaper-o"> </span></a></li>
+                <li><a href="#"> Kalender <span class="fa fa-calendar-o"> </span></a></li>
+                <li><a href="#"> Support <span class="fa fa-support"> </span></a></li>
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </nav>

@@ -1,0 +1,61 @@
+﻿
+@using OdrorirBoard.Models
+@using OdrorirBoard.Controllers
+@using Microsoft.AspNet.Identity
+@using Microsoft.AspNet.Identity.EntityFramework
+@model IEnumerable<OdrorirBoard.Helpers.NotificationAlert.Notification>
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="false">&times;</span></button>
+                <h4 class="modal-title">Notification Details</h4>
+            </div>
+            <div class="modal-body">
+                <table id="notiTable" class="table table-bordred table-striped">
+                    <tr>
+                        <th>@Html.DisplayNameFor(model => model.Title)</th>
+                        <th>@Html.DisplayNameFor(model => model.NotificationType)</th>
+                        <th>@Html.DisplayNameFor(model => model.Controller)</th>
+                        <th>@Html.DisplayNameFor(model => model.Action)</th>
+                        <th>@Html.DisplayNameFor(model => model.UserId)</th>
+                        <th>@Html.DisplayNameFor(model => model.IsDismissed)</th>
+
+                    </tr>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Title)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.NotificationType)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Controller)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Action)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.UserId)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.IsDismissed)
+                            </td>
+
+                    </table>
+                    }
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        
+                    </div>                    
+                </div>
+            </div>
+        </div>
+    </div>

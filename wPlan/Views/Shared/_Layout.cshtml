@@ -1,0 +1,49 @@
+﻿@using Microsoft.AspNet.Identity
+@using Microsoft.AspNet.Identity.EntityFramework
+@using OdrorirBoard.Models
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=9; IE=8; IE=7; IE=EDGE;chrome=1" />
+    <meta charset="utf-8" />
+    <title>WebbPlanering - OdrorirBoard (alpha)</title>
+    <meta content="width=device-width, initial-scale=1.0, user-scalable=no" />
+    <meta name="viewport" content="width=device-width" />
+
+    @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/OdrorirBoard")
+
+    <!--     Fonts and icons     -->
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>
+
+</head>
+<body>
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/OdrorirBoard")
+    @RenderSection("topLevel", required: false)
+
+
+    <div class="container body-content">
+        @{ Html.RenderPartial("_Alerts"); }
+        @RenderBody()
+        <hr />
+        <footer class="footer-OdrorirBoard">
+            <div class="container">
+                <div class="copyright pull-right">
+                    &copy; @DateTime.Now.Year, Skapad med <i class="fa fa-heart heart"></i> av ElefantStudio
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    @*@Scripts.Render("~/bundles/bootstrap")*@
+    @*The Bootstrap JS is loaded here*@
+    @*The JS takes care of some things that can't happen in pure CSS and adds functionality *@
+    @RenderSection("scripts", required: false)
+
+</body>
+</html>

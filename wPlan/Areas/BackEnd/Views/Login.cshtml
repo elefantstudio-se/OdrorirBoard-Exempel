@@ -1,0 +1,67 @@
+﻿@using OdrorirBoard.Models
+@using OdrorirBoard.Areas.BackEnd.Models
+@model OdrorirBoard.Models.LoginViewModel
+
+<!-- CSS -->
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
+<link rel="stylesheet" href="~/Content/BackEnd/css/bootstrap.min.css">
+<link rel="stylesheet" href="~/Content/font-awesome.min.css">
+<link rel="stylesheet" href="~/Content/BackEnd/css/form-elements.css">
+<link rel="stylesheet" href="~/Content/BackEnd/css/style_admin.css">
+<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+<!-- Favicon and touch icons -->
+
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="~/Content/ico/apple-touch-icon-144-precomposed.png">
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="~/Content/ico/apple-touch-icon-114-precomposed.png">
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="~/Content/ico/apple-touch-icon-72-precomposed.png">
+<link rel="apple-touch-icon-precomposed" href="~/Content/ico/apple-touch-icon-57-precomposed.png">
+<!-- Top content -->
+<div class="top-content">
+    <div class="inner-bg">
+        <h2>Odrorir Admin DashBoard</h2>
+    </div>
+    <div class="form-right">
+        <i class="fa fa-lock"></i>
+    </div>
+</div>
+<section id="loginForm">
+    <div class="form-bottom">
+        @using (Html.BeginForm("Login", "BackEnd", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+            {
+            @Html.AntiForgeryToken()
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control", placeholder="Username" })
+                        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                    </div>
+            </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Password, new {@class = "col-md-2 control-label"})
+                    <div class="col-md-10">
+                        @Html.PasswordFor(m => m.Password, new { @class = "form-control", placeholder = "Password" })
+                        @Html.ValidationMessageFor(m => m.Password, "", new {@class = "text-danger"})
+                    </div>
+                </div>
+            <button type="submit" class="btn">LogIn!</button>
+            }
+    </div>
+</section>
+
+    <!-- Javascript -->
+    <script src="~/Scripts/jquery-2.1.4.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/jquery.backstretch.min.js"></script>
+    <script src="~/Scripts/scripts.js"></script>
+
+    <!--[if lt IE 10]>
+        <script src="~/Scripts/placeholder.js"></script>
+    <![endif]-->
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -1,0 +1,145 @@
+﻿@using Microsoft.AspNet.Identity
+@using Microsoft.AspNet.Identity.EntityFramework
+@using OdrorirBoard.Models
+@using OdrorirBoard.Helpers
+@model IEnumerable<OdrorirBoard.Areas.BackEnd.Models.TeamViewModel.Team>
+
+@{
+    ViewBag.Title = "TeamAdmin";
+}
+
+<!-- modal placeholder-->
+<div id='deleteModal' class='modal fade in'>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div id='deleteContent'></div>
+        </div>
+    </div>
+</div>
+
+<html>
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=9; IE=8; IE=7; IE=EDGE">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Administration Dashboard</title>
+
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
+    <link rel="stylesheet" href="~/Content/bootstrap.min.css">
+    <link rel="stylesheet" href="~/Content/font-awesome.min.css">
+    <link rel="stylesheet" href="~/Content/Site.css">
+    @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/themes/base/css")
+
+</head>
+<body>
+    @Scripts.Render("~/bundles/modernizr")
+    <br />
+    <ol class="breadcrumb">
+        <li><a href="#">BackEnd</a></li>
+        <li class="active">Management</li>
+        <li class="active">TeamManager</li>
+    </ol>
+    <br />
+    <br />
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="panel panel-info">
+                    <!-- Default panel contents -->
+                    <div class="panel-heading ">
+                        @{ SiteDataContext _context = new SiteDataContext();
+                            var totalTeamcount = (_context.Teams.Count().ToString());
+                            var projectCount = (_context.Projects.Count().ToString());
+                        }
+                        <span class="glyphicon glyphicon-th"></span> # Of Teams: <b> @totalTeamcount </b>
+                    </div>
+                    <div>
+                        <table id="notiTable" class="table table-condensed table-hover">
+                            <tr>
+                                <th>Teamname</th>
+                                <th>State</th>
+                                <th>#Members</th>
+                                <th>Since?</th>
+                            </tr>
+                            @foreach (var item in Model)
+                            {
+                                var teamstate = OdrorirBoard.Areas.BackEnd.Models.TeamViewModel.LabelState.Active == item.TeamState ? "label-success" : "label-info";
+                                string odrorir_dialogs = "";
+                                <tr>
+                                    <td>
+                                        @Html.OdrorirDetails(item.Name,"Details","Teams",item.Id, odrorir_dialogs)
+                                        @*<a href="@Url.Action("Details", "Teams", new { id = item.Id })">@Html.DisplayFor(modelItem => item.Name)</a>*@
+                                    </td>
+                                    <td>
+                                        <span class="label @teamstate">@item.TeamState</span>
+                                    </td>
+                                    <td>
+                                        <div class="btn-group">
+                                            <button class="btn btn-info btn-xs dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                Members <span class="badge img-circle"> @Html.DisplayFor(modelItem => item.Members.Count)</span>
+                                            </button>
+                                            <ul class="dropdown-menu">
+                                                @{ if (item.Members != null)
+                                                    {
+                                                        <li><a href="#">No Members Added!</a></li>
+                                                    }
+                                                    else if (item.Members == null)
+                                                    {
+                                                        <li><a href="#">@Html.DisplayFor(modelItem => item.Members, new SelectList(item.Members, "", "", null))</a></li>
+                                                    }
+                                                }
+                                            </ul>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <span class="label label-info">@Html.DisplayFor(modelItem => item.CreatedOn.Year)/@Html.DisplayFor(modelItem => item.CreatedOn.Month)/@Html.DisplayFor(modelItem => item.CreatedOn.Day)</span>
+                                    </td>
+                                    <td>
+                                        <span>
+                                            <a href="@Url.Action("Change", "Teams", new { id = item.Id })"><span class="glyphicon glyphicon-pencil"></span></a>
+                                        </span>
+                                            <span>
+                                               @Html.OdrorirDelete(" ", "Remove", "Teams",item.Id,odrorir_dialogs)
+                                            </span>
+                                    </td>
+                                </tr>
+                               }
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="panel panel-success">
+                    <!-- Default panel contents -->
+                    <div class="panel-heading"><span class="glyphicon glyphicon-plus"></span><b>Quick-Create a Team</b></div>
+                    <div class="panel-body">
+                        <div class="input-group">
+                            <span class="input-group-btn">
+                                <button class="glyphicon glyphicon-plus btn btn-row" type="button"><b>ADD</b></button>
+                            </span>
+
+                            <input type="text" class="form-control" placeholder="Teamname...">
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="navbar-collapse collapse">
+        @Html.Partial("_adminMenuPartial")
+    </div>
+    <div class="container body-content">
+        @{ Html.RenderPartial("_Alerts"); }
+    </div>
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+        @Scripts.Render("~/bundles/modalform")
+        @Scripts.Render("~/bundles/OdrorirBoard")
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/bootstrap")
+    }
+</body>
+</html>

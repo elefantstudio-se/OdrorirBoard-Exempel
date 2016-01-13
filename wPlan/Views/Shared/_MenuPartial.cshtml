@@ -1,0 +1,23 @@
+﻿
+@using OdrorirBoard.Models
+@using OdrorirBoard.Areas.BackEnd.Models
+<ul class="nav navbar-nav">
+    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+
+    
+
+    @if (ViewBag.Notifications != null)
+    {
+        foreach (NotificationViewModel notification in ViewBag.Notifications)
+        {
+            <li>
+                <a href="#">
+                    @notification.NotificationType
+                    <span class="badge badge-@notification.BadgeClass">
+                        @notification.Count
+                    </span>
+                </a>
+            </li>
+        }
+    }
+</ul>

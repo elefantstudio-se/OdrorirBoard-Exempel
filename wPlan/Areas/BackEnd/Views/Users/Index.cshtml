@@ -1,0 +1,121 @@
+﻿@using Microsoft.AspNet.Identity
+@using Microsoft.AspNet.Identity.EntityFramework
+@using OdrorirBoard.Models
+@model IEnumerable<OdrorirBoard.Models.OdrorirUserInfo>
+
+
+@{
+    ViewBag.Title = "User Administration";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Administration Dashboard</title>
+    <!-- CSS -->
+    @Scripts.Render("~/bundles/modernizr")
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500" />
+    <link rel="stylesheet" href="~/Content/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/Content/font-awesome.min.css" />
+    <link rel="stylesheet" href="~/Content/Site.css" />
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+<body>
+    
+    @Scripts.Render("~/bundles/jquery")
+    <br />
+    <ol class="breadcrumb">
+        <li><a href="#">BackEnd</a></li>
+        <li class="active">Management</li>
+        <li class="active">UserManager</li>
+    </ol>
+    <br />
+    <br />
+    <h2>UserManager</h2>
+    <div class="panel panel-info">
+        <div class="panel-heading"><b>List ALL Users</b></div>
+        <table id="notiTable" class="table">
+            <tr>
+                <th>Username</th>
+                <th>Name</th>
+                <th>Group/Role</th>
+                <th>Team</th>
+                <th>Registered?</th>
+                <th>Active?</th>
+            </tr>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UserName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FirstName)
+                    </td>
+                    <td>
+                        @*@Html.DisplayFor(modelItem => item.Roles)*@
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.memberInTeam)
+                    </td>
+                    <td>
+                        <span class="label label-info">@Html.DisplayFor(modelItem => item.CreatedOn.Year)/@Html.DisplayFor(modelItem => item.CreatedOn.Month)/@Html.DisplayFor(modelItem => item.CreatedOn.Day)</span>
+                    </td>
+                    @{
+                        if (!item.isActive)
+                            <td>
+                                <span class="label label-success">@Html.DisplayFor(modelItem => item.isActive)</span>
+                            </td>
+                        else if (item.isActive)
+                            <td>
+                                <span class="label label-warning">@Html.DisplayFor(modelItem => item.isActive)</span>
+                            </td>
+                    }
+                    <td>
+                        <span class="label label-info">@Html.DisplayFor(modelItem => item.isActive)</span>
+                    </td>
+                    <td>
+                        <span>
+                            @Html.ActionLink("UserTasks", "Teams", "BackEnd", new { id = item.Id }, new { @class = "glyphicon glyphicon-info-sign" })
+                        </span>
+                        <span>
+                            <a href="@Url.Action("Change", "Teams", new { id = item.Id, nmCuser = item.UserName })"><span class="glyphicon glyphicon-pencil"></span></a>
+                        </span>
+                        <span>
+                            <a href="@Url.Action("Remove", "Teams", new { id = item.Id, nmCuser = item.UserName })">TEST</a>
+
+                        </span>
+                    </td>
+                </tr>
+            }
+        </table>
+        <span>
+            <a href="@Url.Action("New", "Teams")"><span class="glyphicon glyphicon-plus-sign"></span> Create new</a>
+        </span>
+    </div>
+    <div class="navbar-collapse collapse">
+        @Html.Partial("_adminMenuPartial")
+    </div>
+    <div class="container body-content">
+        @{ Html.RenderPartial("_Alerts"); }
+        <hr />
+    </div>
+    
+    
+    @*The Bootstrap JS is loaded here*@
+    @*The JS takes care of some things that can't happen in pure CSS and adds functionality *@
+    @*@Scripts.Render("~/bundles/bootstrap")*@
+</body>
+</html>
+

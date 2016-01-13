@@ -1,0 +1,43 @@
+﻿@using OdrorirBoard.Models
+@using OdrorirBoard.Controllers
+@using Microsoft.AspNet.Identity
+@using Microsoft.AspNet.Identity.EntityFramework
+@model IEnumerable<OdrorirBoard.Areas.BackEnd.Models.TeamViewModel.Team>
+
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h4 class="modal-title" id="detailsModal"><span class="fa fa-group"></span> Team Details</h4>
+</div>
+
+<div class="modal-body">
+        <table id="detailsTable" class="table table-hover">
+            @{ SiteDataContext _context = new SiteDataContext();
+                OdrorirBoard.Areas.BackEnd.Models.TeamViewModel.Team teams = new OdrorirBoard.Areas.BackEnd.Models.TeamViewModel.Team();
+                OdrorirBoard.Areas.BackEnd.Models.ProjectsViewModel.Project projects = new OdrorirBoard.Areas.BackEnd.Models.ProjectsViewModel.Project();
+                //string projectMembers = projects.projectMembers.Count().ToString();
+                //string teamMembers = team.Members.Count().ToString();
+            }
+            <tr>
+                <th><span class="glyphicon glyphicon-cloud"></span>@Html.DisplayNameFor(model => model.Projects)</th>
+                <th><span class="glyphicon glyphicon-blackboard"></span> # Kanbands</th>
+                <th><span class="glyphicon glyphicon-user"></span> @Html.DisplayNameFor(model => model.Members)</th>
+            </tr>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Projects)
+                    </td>
+                    <td>
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Members)
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+          <div class="modal-footer">
+             <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
+          </div>                    
+

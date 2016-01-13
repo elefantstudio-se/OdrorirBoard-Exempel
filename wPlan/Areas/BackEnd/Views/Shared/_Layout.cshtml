@@ -1,0 +1,45 @@
+﻿@using Microsoft.AspNet.Identity
+@using Microsoft.AspNet.Identity.EntityFramework
+@using OdrorirBoard.Models
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    @RenderSection("topLevel", required: false)
+
+    
+<div id="modal-container" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-content">
+            <div class="modal-body"></div>
+        </div>
+    </div>
+
+
+<div class=" container body-content">
+    @{ Html.RenderPartial("_Alerts"); }
+    @RenderBody()
+    <hr/>
+   <footer class="footer-demo section-dark">
+        <div class="container">
+            <nav class="pull-left">
+            </nav>
+            <div class="copyright pull-right">
+                &copy; @DateTime.Now.Year, Skapad med <i class="fa fa-heart heart"></i> av ElefantStudio
+            </div>
+        </div>
+    </footer>
+</div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @*The Bootstrap JS is loaded here*@
+    @*The JS takes care of some things that can't happen in pure CSS and adds functionality *@
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

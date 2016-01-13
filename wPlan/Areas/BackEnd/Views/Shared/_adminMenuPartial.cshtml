@@ -1,0 +1,75 @@
+﻿@using OdrorirBoard.Areas.BackEnd.Models
+@using OdrorirBoard.Areas.BackEnd.Controllers
+
+
+<nav role="navigation" class="navbar navbar-inverse navbar-fixed-top">
+    <!-- Grouping Brand with Toggle for better mobile display -->
+    <div class="navbar-header">
+        <button type="button" data-target="#navbarCollapse" data-toggle="collapse" class="navbar-toggle">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <a href="#" class="navbar-brand">OB DashBoard</a>
+    </div>
+    <!-- Next nav links in the Navbar -->
+    <div id="navbarCollapse" class="collapse navbar-collapse">
+        <ul class="nav navbar-nav">
+            <li class="active"><a href="#"><span class="glyphicon glyphicon-home"></span> Dashboard</a></li>
+            <li class="dropdown">
+                <a data-toggle="dropdown" class="dropdown-toggle" href="#"><span class="glyphicon glyphicon-info-sign"></span> Management <b class="caret"></b></a>
+                <ul role="menu" class="dropdown-menu">
+                    <li><a href="#">UserManager</a></li>
+                    <li><a href="#">GroupManager</a></li>
+                    <li><a href="#">RoleManagers</a></li>
+                    <li class="divider"></li>
+                    <li>@Html.ActionLink("TeamManager", "Index", "Teams")</li>
+                    <li><a href="#">ProjectManager</a></li>
+                    <li class="divider"></li>
+                    <li>@Html.ActionLink("Notifications", "Index", "Notify")</li>
+                </ul>
+            </li>
+            <li class="dropdown">
+                <a data-toggle="dropdown" class="dropdown-toggle" href="#"><span class="glyphicon glyphicon-fire"></span> OdrorirBoard <b class="caret"></b></a>
+                <ul role="menu" class="dropdown-menu">
+                    <li><a href="#">Logs</a></li>
+                    <li><a href="#">PlanBoard</a></li>
+                    <li><a href="#">Latest - Teams</a></li>
+                    <li><a href="#">Latest - Projects</a></li>
+                    <li class="divider"></li>
+                    <li><a href="#">Settings</a></li>
+                </ul>
+            </li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="#">Contact</a></li>
+            <li class="dropdown">
+                <a data-toggle="dropdown" class="dropdown-toggle" href="#"><span class="glyphicon glyphicon-user"></span>USER   <b class="caret"></b></a>
+                <ul role="menu" class="dropdown-menu">
+                    <li><a href="#"><span class="glyphicon glyphicon-dashboard"></span> TeamBoard</a></li>
+                    <li><a href="#"><span class="glyphicon glyphicon-cloud"></span> Projects</a></li>
+                    <li><a href="#"><span class="glyphicon glyphicon-envelope"></span> Messages</a></li>
+                    <li><a href="#"><span class="glyphicon glyphicon-alert"></span> Notifications</a></li>
+                    <li class="divider"></li>
+                    <li><a href="#"><span class="glyphicon glyphicon-cog"></span> Settings</a></li>
+                    <li><a href="#"><span class="glyphicon glyphicon-off"></span> Logout</a></li>
+                    @if (ViewBag.Notifications != null)
+                    {
+                        foreach (NotificationViewModel notification in ViewBag.Notifications)
+                        {
+                            <li>
+                                <a href="#">
+                                    @notification.NotificationType
+                                    <span class="badge badge-@notification.BadgeClass">
+                                        @notification.Count
+                                    </span>
+                                </a>
+                            </li>
+                        }
+                    }
+                </ul>
+            </li>
+        </ul>
+    </div>
+</nav>

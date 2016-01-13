@@ -1,0 +1,117 @@
+﻿@using Microsoft.AspNet.Identity
+@using Microsoft.AspNet.Identity.EntityFramework
+@using OdrorirBoard.Models
+
+@model IEnumerable<OdrorirBoard.Areas.BackEnd.Models.ProjectsViewModel.Project>
+
+
+@{
+    ViewBag.Title = "Projects";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Administration Dashboard</title>
+    <!-- CSS -->
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
+    <link rel="stylesheet" href="~/Content/bootstrap.min.css">
+    <link rel="stylesheet" href="~/Content/font-awesome.min.css">
+    <link rel="stylesheet" href="~/Content/Site.css">
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+<body>
+    @Scripts.Render("~/bundles/modernizr")
+    <br />
+    <ol class="breadcrumb">
+        <li><a href="#">BackEnd</a></li>
+        <li class="active">Management</li>
+        <li class="active">TeamManager</li>
+    </ol>
+    <br />
+    <br />
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="panel panel-info">
+                    <!-- Default panel contents -->
+                    <div class="panel-heading ">
+                        <span class="glyphicon glyphicon-th"></span> Projects in DB <b>: {NR}</b>
+                    </div>
+                    <div class="panel-body">
+                        <table id="projectTable" class="table">
+                            <tr>
+                                <th>Title</th>
+                                <th>Status</th>
+                            </tr>
+                            @foreach (var item in Model)
+                            {
+                                var projectActive = OdrorirBoard.Areas.BackEnd.Models.ProjectsViewModel.ProjectLabelState.Active == item.ProjectState? "label-success" : "label-info";
+                                var projectInactive = OdrorirBoard.Areas.BackEnd.Models.ProjectsViewModel.ProjectLabelState.NotActive == item.ProjectState ? "label-default" : "label-error";
+                                var projectComplete = OdrorirBoard.Areas.BackEnd.Models.ProjectsViewModel.ProjectLabelState.Complete == item.ProjectState ? "label-success" : "label-info";
+                                var projectAlpha = OdrorirBoard.Areas.BackEnd.Models.ProjectsViewModel.ProjectLabelState.Alpha == item.ProjectState ? "label-warning" : "label-info";
+                                var projectBeta = OdrorirBoard.Areas.BackEnd.Models.ProjectsViewModel.ProjectLabelState.Beta == item.ProjectState ? "label-warning" : "label-info";
+                                var projectOptimizing = OdrorirBoard.Areas.BackEnd.Models.ProjectsViewModel.ProjectLabelState.Optimizing == item.ProjectState ? "label-success" : "label-warning";
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Name)
+                                    </td>
+                                    <td>
+                                        <span class="label @projectActive @projectInactive @projectComplete @projectAlpha @projectBeta @projectOptimizing">@item.ProjectState</span>
+                                    </td>
+                                    <td>
+                                        <span>
+                                            @Html.ActionLink(" ", "Details", "Projects", new {id = item.Id }, new {@class = "modal-link glyphicon glyphicon-info-sign"})
+                                        </span>
+                                        <span>
+                                            <a href="@Url.Action("Change", "Projects", new {id = item.Id})"><span class="glyphicon glyphicon-pencil"></span></a>
+                                        </span>
+                                        <span>
+
+                                            <a href="@Url.Action("Remove", "Projects", new {id = item.Id})"><span class="glyphicon glyphicon-trash"></span></a>
+                                        </span>
+                                    </td>
+                                </tr>
+                            }
+                        </table>
+                        <span>
+                            <a href="@Url.Action("New", "Projects")"><span class="glyphicon glyphicon-plus-sign"></span> Create new</a>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <div class="navbar-collapse collapse">
+        @Html.Partial("_adminMenuPartial")
+    </div>
+    <div class="container body-content">
+        @{ Html.RenderPartial("_Alerts"); }
+        <hr />
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @*The Bootstrap JS is loaded here*@
+    @*The JS takes care of some things that can't happen in pure CSS and adds functionality *@
+    @*@Scripts.Render("~/bundles/bootstrap")*@
+</body>
+
+
+
+</html>
+
+
