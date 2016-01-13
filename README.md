@@ -11,7 +11,7 @@ Har påbörjat Admin arean.
 Lagt till Notifications, Labels, med hjälp utav Bootstrap, Jquery, Modal. 
 Som används i VIEWS för TEAM och Projekt, se kod där i....
 
-Trello-Kopia ska kopplas på, dvs Odboard. Se andra repository, ODKanban-Exempel
+Trello API ska kunna kopplas på, även Github, #slack.
 
 #### Grund/Tanke
 
