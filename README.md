@@ -1,5 +1,7 @@
 # ODBoard
-OdrorirBoard
+OdrorirBoard ( hade namn wPlan innan ) WorkPlan.
+Odrorir - Var kittlen som Dvärgarna bryggde mjöd i , Nordisk mytologi. De som beblandade sig med Odrorir fick kunskap inom
+poesi och utbildningar.
 
 ### Webb Applikation
 
@@ -19,20 +21,21 @@ Trello-Kopia ska kopplas på, dvs Odboard. Se andra repository, ODKanban-Exempel
 Lägger till användare om man vill, Delar ut uppgifter, Laddar upp projekt filer.
 I samma veva som man skapar Team, så ska man få frågan om man vill skapa en #slack kanal som e kopplat till Teamets användare.
 
-##Team
+## Team
 + TeamState i VIEW , som hämtar från Areas/BackEnd/Models/TeamViewModel.cs
-## Code
-#####@foreach (var item in Model)
+
+## Kod
+@foreach (var item in Model)
  {
    var teamstate = OdrorirBoard.Areas.BackEnd.Models.TeamViewModel.LabelState.Active == item.TeamState ? "label-success" : "label-info";
 
 Indikerar hur Statusen är satt, Active, Private, NotActive.
 
-##Projekt
+## Projekt
 + ProjektState i VIEW, Hämtas från Areas/BackEnd/Models/ProjectsViewModel.cs
 
 ## Kod
-#####@foreach (var item in Model)
+@foreach (var item in Model)
                             {
                                 var projectActive = OdrorirBoard.Areas.BackEnd.Models.ProjectsViewModel.ProjectLabelState.Active == item.ProjectState? "label-success" : "label-info";
                                 var projectInactive = OdrorirBoard.Areas.BackEnd.Models.ProjectsViewModel.ProjectLabelState.NotActive == item.ProjectState ? "label-default" : "label-error";
