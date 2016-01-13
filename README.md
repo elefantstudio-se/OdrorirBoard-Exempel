@@ -21,7 +21,7 @@ I samma veva som man skapar Team, så ska man få frågan om man vill skapa en #
 
 ##Team
 + TeamState i VIEW , som hämtar från Areas/BackEnd/Models/TeamViewModel.cs
-## Kod
+## Code
 #####@foreach (var item in Model)
  {
    var teamstate = OdrorirBoard.Areas.BackEnd.Models.TeamViewModel.LabelState.Active == item.TeamState ? "label-success" : "label-info";
@@ -41,10 +41,9 @@ Indikerar hur Statusen är satt, Active, Private, NotActive.
                                 var projectBeta = OdrorirBoard.Areas.BackEnd.Models.ProjectsViewModel.ProjectLabelState.Beta == item.ProjectState ? "label-warning" : "label-info";
                                 var projectOptimizing = OdrorirBoard.Areas.BackEnd.Models.ProjectsViewModel.ProjectLabelState.Optimizing == item.ProjectState ? "label-success" : "label-warning";
 
-####
-                                <td>
-                                        <span class="label @projectActive @projectInactive @projectComplete @projectAlpha @projectBeta @projectOptimizing">@item.ProjectState</span>
-                                    </td>
+<td>
+<span class="label @projectActive @projectInactive @projectComplete @projectAlpha @projectBeta @projectOptimizing">@item.ProjectState</span>
+</td>
 
 	
 ####Mer idéer finns, 
